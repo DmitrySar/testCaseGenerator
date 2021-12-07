@@ -20,7 +20,7 @@ public class MainController {
         Chapter chapter = new Chapter();
         chapter.setName(chapterName);
         repository.save(chapter);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/testcase")
@@ -31,7 +31,7 @@ public class MainController {
         Chapter chapter = repository.findById(chapterId).get();
         chapter.addTestCase(testCase);
         repository.save(chapter);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping
