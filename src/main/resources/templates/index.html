@@ -2,27 +2,28 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="css/floatForm.css" rel="stylesheet">
-    <script src="js/floatForm.js"></script>
+    <link href="css/main.css" rel="stylesheet">
     <title>Test Case</title>
 </head>
 <body>
-<button class="open-button oval" onclick="openForm()">Добавить</button>
 <div>
-    <div class="form-popup oval" id="myForm">
-        <form action="/chapter" method="get" class="form-container">
-            <input class="oval" placeholder="Название раздела" type="text" name="chapterName">
-            <button type="submit" class="btn oval">Add</button>
-            <button type="button" class="btn cancel oval" onclick="closeForm()">Закрыть</button>
-        </form>
-    </div>
+    <form action="/chapter" method="get">
+        <input placeholder="Новый раздел" type="text" name="chapterName">
+        <input type="submit" value="Добавить">
+    </form>
 </div>
-<div class="main-block">
-    <table>
-        <tr th:each="c : ${chapters}">
-            <td th:text="${c.name}" />
-        </tr>
-    </table>
+<div>
+    <fieldset th:each="ch : ${chapters}">
+        <legend th:text="${ch.name}" />
+        <form action="/testcase" method="get">
+            <input type="hidden" th:value="${ch.id}" name="chapterId">
+            <input placeholder="Новый тест-кейс" type="text" name="caseName">
+            <input type="submit" value="Добавить">
+        </form>
+        <span th:each="t : ${ch.testCaseList}">
+            <button th:text="${t.name}">123</button>
+        </span>
+    </fieldset>
 </div>
 </body>
 </html>
