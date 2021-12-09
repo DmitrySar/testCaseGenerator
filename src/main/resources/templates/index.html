@@ -16,13 +16,12 @@
 <div>
     <fieldset th:each="ch : ${chapters}">
         <legend th:text="${ch.name}" />
-        <form action="/testcase" method="get">
-            <input type="hidden" th:value="${ch.id}" name="chapterId">
-            <input onclick="addField()" placeholder="Новый тест-кейс" type="text" name="caseName">
-            <span id="dynamic">
+        <form action="/testcase" method="get" th:object="${ch}">
+            <input type="hidden" th:value="*{id}" name="chapterId">
+            <input th:onclick="|addField('ch*{id}')|" placeholder="Новый тест-кейс" type="text" name="caseName">
+            <input type="submit" value="Добавить">
+            <span th:id="|ch*{id}|">
             </span>
-
-            <br><input type="submit" value="Добавить">
         </form>
         <span th:each="t : ${ch.testCaseList}">
             <button th:text="${t.name}">123</button>
