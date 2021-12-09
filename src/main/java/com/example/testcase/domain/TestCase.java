@@ -15,7 +15,7 @@ public class TestCase {
     @GeneratedValue
     private int id;
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Step> stepList = new ArrayList<>();
 
     public TestCase(String name, List<Step> stepList) {

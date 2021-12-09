@@ -1,13 +1,21 @@
 package com.example.testcase.controller;
 
 import com.example.testcase.domain.Chapter;
+import com.example.testcase.domain.Step;
 import com.example.testcase.domain.TestCase;
 import com.example.testcase.repository.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class MainController {
@@ -25,9 +33,14 @@ public class MainController {
 
     @GetMapping("/testcase")
     public String addTestCase(@RequestParam int chapterId,
-                              @RequestParam String caseName) {
+                              @RequestParam String caseName,
+                              @RequestParam String[] stepNames,
+                              @RequestParam String[] stepRes) {
         TestCase testCase = new TestCase();
         testCase.setName(caseName);
+        List<Step> stepList = IntStream.range(0, stepNames.length)
+                .mapToObj(i -> new Step(stepNames[i], stepRes[i])).collect(Collectors.toList());
+        testCase.setStepList(stepList);
         Chapter chapter = repository.findById(chapterId).get();
         chapter.addTestCase(testCase);
         repository.save(chapter);

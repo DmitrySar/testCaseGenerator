@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="css/main.css" rel="stylesheet">
+    <script src="js/dynamicAddFields.js"></script>
     <title>Test Case</title>
 </head>
 <body>
@@ -17,8 +18,11 @@
         <legend th:text="${ch.name}" />
         <form action="/testcase" method="get">
             <input type="hidden" th:value="${ch.id}" name="chapterId">
-            <input placeholder="Новый тест-кейс" type="text" name="caseName">
-            <input type="submit" value="Добавить">
+            <input onclick="addField()" placeholder="Новый тест-кейс" type="text" name="caseName">
+            <span id="dynamic">
+            </span>
+
+            <br><input type="submit" value="Добавить">
         </form>
         <span th:each="t : ${ch.testCaseList}">
             <button th:text="${t.name}">123</button>
