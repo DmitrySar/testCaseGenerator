@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/">Главная</a>
+    </nav>
+</header>
+<div th:each="ch: ${chapters}">
+    <fieldset>
+        <legend>
+            <a th:text="|${ch.name}(Удалить раздел)|" th:href="@{/admin/delChapter(id=${ch.id})}"></a>
+        </legend>
+        <span th:each="test: ${ch.testCaseList}">
+            <br><a th:text="|${test.name}(Удалить тест-кейс)|" th:href="@{/admin/delTest(chapterId=${ch.id}, testId=${test.id})}"></a>
+        </span>
+    </fieldset>
+</div>
+</body>
+</html>
