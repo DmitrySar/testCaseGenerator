@@ -1,4 +1,11 @@
-let testCaseList = [];
+var testCases = [];
+var url = new URL("http://"+location.host+"/createTests?testCases=");
+
+function sendTestCaseList() {
+    var req = "";
+    testCases.forEach(t => req += t.testCaseId + "&testCases=");
+    window.location.replace(url + req.substr(0,req.length-11));
+}
 
 function setColor(btnId) {
     btn = document.getElementById(btnId);
@@ -20,19 +27,19 @@ function addTestCase(chId, tcId, btnId) {
         removeTestCase(testCase);
         resetColor(btnId);
     } else {
-        testCaseList.push(testCase);
+        testCases.push(testCase);
         setColor(btnId);
     }
 
 }
 
 function isAdded(testCase) {
-    return testCaseList.filter(t => t.chapterId == testCase.chapterId
+    return testCases.filter(t => t.chapterId == testCase.chapterId
         && t.testCaseId == testCase.testCaseId).length > 0;
 }
 
 function removeTestCase(testCase) {
-    index = testCaseList.findIndex(t => t.chapterId == testCase.chapterId
+    index = testCases.findIndex(t => t.chapterId == testCase.chapterId
         && t.testCaseId == testCase.testCaseId);
-    testCaseList.splice(index);
+    testCases.splice(index);
 }
