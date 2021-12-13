@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link href="css/main.css" rel="stylesheet">
     <script src="js/dynamicAddFields.js"></script>
+    <script src="js/addTestCase.js"></script>
     <title>Test Case</title>
 </head>
 <body>
@@ -12,24 +13,25 @@
         <a href="/admin">Админка</a>
     </nav>
 </header>
-<div>
+<div class="oval">
     <form action="/chapter" method="get">
-        <input placeholder="Новый раздел" type="text" name="chapterName">
-        <input type="submit" value="Добавить">
+        <input class="oval" placeholder="Новый раздел" type="text" name="chapterName">
+        <input class="oval" type="submit" value="Добавить">
     </form>
 </div>
 <div>
-    <fieldset th:each="ch : ${chapters}">
+    <fieldset th:each="ch : ${chapters}" class="oval">
         <legend th:text="${ch.name}" />
         <form action="/testcase" method="get" th:object="${ch}">
             <input type="hidden" th:value="*{id}" name="chapterId">
-            <input th:onclick="|addField('ch*{id}')|" placeholder="Новый тест-кейс" type="text" name="caseName">
-            <input type="submit" value="Добавить">
+            <input class="oval" th:onclick="|addField('ch*{id}')|" placeholder="Новый тест-кейс" type="text" name="caseName">
+            <input class="oval" type="submit" value="Добавить">
             <span th:id="|ch*{id}|">
             </span>
         </form>
         <span th:each="t : ${ch.testCaseList}">
-            <button th:text="${t.name}">123</button>
+            <button class="oval" th:id="|btn${ch.id}${t.id}|" th:text="${t.name}" th:onclick="|addTestCase(${ch.id},
+                    ${t.id}, 'btn${ch.id}${t.id}')|">123</button>
         </span>
     </fieldset>
 </div>
