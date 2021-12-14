@@ -25,13 +25,17 @@ public class TestCaseController {
     }
 
     @PostMapping
-    public List<Chapter> testCaseList(@RequestBody List<TestCaseFromChapter> testCases) {
+    public List<TestCase> testCaseList(@RequestBody List<TestCaseFromChapter> testCases) {
         List<TestCase> testCaseList = new ArrayList<>();
         List<Chapter> chapters = testCases.stream()
                 .map(t -> repository.findById(t.getChapterId()).get())
                 .collect(Collectors.toList());
-        //TODO create filter
-        return chapters;
+        chapters.forEach(c -> testCaseList.addAll(c.getTestCaseList()));
+        return testCaseList.stream()
+                .filter(t -> testCases.stream()
+                        .anyMatch(tc -> tc.getTestCaseId() == t.getId()))
+                .collect(Collectors.toList());
+
     }
 
 }
