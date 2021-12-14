@@ -1,22 +1,19 @@
 var testCases = [];
-var url = new URL("http://"+location.host+"/createTests?testCases=");
+var url = new URL("http://"+location.host+"/createTests");
 
 function sendTestCaseList() {
     // var req = "";
     // testCases.forEach(t => req += t.testCaseId + "&testCases=");
     // window.location.replace(url + req.substr(0,req.length-11));
     testComplect = document.getElementById("test-complect");
-    fetch('http://localhost/createTests', {
+    fetch(url, {
         method: 'post',
         redirect: 'follow',
         headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify([{
-            "name": "test",
-            "expResult": "testResult"
-        }])
+        body: JSON.stringify(testCases)
     }).then(res => res.text())
         .then(res => testComplect.innerHTML = `<fieldset><legend>Тест-комплект</legend>${res}</fieldset>`);
 }
