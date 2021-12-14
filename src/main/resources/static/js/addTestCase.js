@@ -2,9 +2,23 @@ var testCases = [];
 var url = new URL("http://"+location.host+"/createTests?testCases=");
 
 function sendTestCaseList() {
-    var req = "";
-    testCases.forEach(t => req += t.testCaseId + "&testCases=");
-    window.location.replace(url + req.substr(0,req.length-11));
+    // var req = "";
+    // testCases.forEach(t => req += t.testCaseId + "&testCases=");
+    // window.location.replace(url + req.substr(0,req.length-11));
+    testComplect = document.getElementById("test-complect");
+    fetch('http://localhost/createTests', {
+        method: 'post',
+        redirect: 'follow',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([{
+            "name": "test",
+            "expResult": "testResult"
+        }])
+    }).then(res => res.text())
+        .then(res => testComplect.innerHTML = `<fieldset><legend>Тест-комплект</legend>${res}</fieldset>`);
 }
 
 function setColor(btnId) {
