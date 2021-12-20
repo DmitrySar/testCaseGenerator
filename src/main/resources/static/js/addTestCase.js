@@ -2,9 +2,6 @@ var testCases = [];
 var url = new URL("http://"+location.host+"/createTests");
 
 function sendTestCaseList() {
-    // var req = "";
-    // testCases.forEach(t => req += t.testCaseId + "&testCases=");
-    // window.location.replace(url + req.substr(0,req.length-11));
     testComplect = document.getElementById("test-complect");
     fetch(url, {
         method: 'post',

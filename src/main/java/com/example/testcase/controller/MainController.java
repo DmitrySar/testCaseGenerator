@@ -34,12 +34,13 @@ public class MainController {
     @GetMapping("/testcase")
     public String addTestCase(@RequestParam int chapterId,
                               @RequestParam String caseName,
-                              @RequestParam String[] stepNames,
-                              @RequestParam String[] stepRes) {
+                              @RequestParam String expResult,
+                              @RequestParam String[] stepNames) {
         TestCase testCase = new TestCase();
         testCase.setName(caseName);
+        testCase.setExpResult(expResult);
         List<Step> stepList = IntStream.range(0, stepNames.length)
-                .mapToObj(i -> new Step(stepNames[i], stepRes[i])).collect(Collectors.toList());
+                .mapToObj(i -> new Step(stepNames[i], "")).collect(Collectors.toList());
         testCase.setStepList(stepList);
         Chapter chapter = repository.findById(chapterId).get();
         chapter.addTestCase(testCase);
