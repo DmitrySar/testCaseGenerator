@@ -40,6 +40,7 @@ public class MainController {
         TestCase testCase = new TestCase();
         testCase.setName(caseName);
         testCase.setExpResult(expResult);
+        testCase.setCondition(condition);
         List<Step> stepList = IntStream.range(0, stepNames.length)
                 .mapToObj(i -> new Step(stepNames[i], "")).collect(Collectors.toList());
         testCase.setStepList(stepList);
