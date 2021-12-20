@@ -1,9 +1,18 @@
-var testCases = [];
-var url = new URL("http://"+location.host+"/createTests");
+let testCases = [];
+let url = new URL("http://"+location.host+"/createTests");
+let testCaseResponse = [];
+let testCaseBackEnd = {
+    id: 0,
+    name: '',
+    expResult: '',
+    stepList: []
+};
+let step = {
+
+}
 
 function sendTestCaseList() {
-    testComplect = document.getElementById("test-complect");
-    fetch(url, {
+        fetch(url, {
         method: 'post',
         redirect: 'follow',
         headers: {
@@ -11,8 +20,28 @@ function sendTestCaseList() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(testCases)
-    }).then(res => res.text())
-        .then(res => testComplect.innerHTML = `<fieldset><legend>Тест-комплект</legend>${res}</fieldset>`);
+    }).then(res => res.json())
+        .then(res =>  fillTestComplete(res));
+
+}
+
+function fillTestComplete(res) {
+    testCaseResponse = res;
+    let testComplect = document.getElementById("test-complect");
+    let inner = '';
+    for (let k in testCaseResponse) {
+        testCaseBackEnd = testCaseResponse[k];
+        inner += "<p><b>Тест-кейс №" + (parseInt(k)+1) + ". " + testCaseBackEnd.name + "</b></p>";
+        inner += `<p><b>Шаги:</b></p>`
+        for (let i in testCaseBackEnd.stepList) {
+            step = testCaseBackEnd.stepList[i];
+            inner += "<p>" + (parseInt(i)+1) + ". " + step.name + "</p>";
+        }
+        inner += "<p><b> Ожидаемый результат:</b><br>" + testCaseBackEnd.expResult +"</p>";
+    }
+
+    testComplect.innerHTML = testComplect.innerHTML = "<fieldset><legend>Тест-комплект</legend>" +
+        inner + "</fieldset>";
 }
 
 function setColor(btnId) {
