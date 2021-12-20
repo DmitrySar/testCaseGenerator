@@ -35,6 +35,7 @@ public class MainController {
     public String addTestCase(@RequestParam int chapterId,
                               @RequestParam String caseName,
                               @RequestParam String expResult,
+                              @RequestParam String condition,
                               @RequestParam String[] stepNames) {
         TestCase testCase = new TestCase();
         testCase.setName(caseName);

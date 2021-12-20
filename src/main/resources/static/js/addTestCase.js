@@ -5,6 +5,7 @@ let testCaseBackEnd = {
     id: 0,
     name: '',
     expResult: '',
+    condition: '',
     stepList: []
 };
 let step = {
@@ -32,6 +33,7 @@ function fillTestComplete(res) {
     for (let k in testCaseResponse) {
         testCaseBackEnd = testCaseResponse[k];
         inner += "<p><b>Тест-кейс №" + (parseInt(k)+1) + ". " + testCaseBackEnd.name + "</b></p>";
+        inner += `<p><b>Условие: </b>${testCaseBackEnd.condition}</p>`
         inner += `<p><b>Шаги:</b></p>`
         for (let i in testCaseBackEnd.stepList) {
             step = testCaseBackEnd.stepList[i];

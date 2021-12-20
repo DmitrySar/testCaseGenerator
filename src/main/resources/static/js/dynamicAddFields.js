@@ -1,6 +1,8 @@
 let ids = 0;
 function addField(id) {
     let expResult = document.getElementById('expResult'+id);
+    let condition = document.getElementById('condition' + id);
+    condition.className = 'oval show';
     expResult.className = 'oval show';
     let vs = [];
     let elem = document.getElementById(id);

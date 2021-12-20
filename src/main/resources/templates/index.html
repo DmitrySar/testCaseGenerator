@@ -27,6 +27,7 @@
             <input class="oval" th:onclick="|addField('ch*{id}')|" placeholder="Новый тест-кейс" type="text" name="caseName">
             <input class="oval" type="submit" value="Добавить">
             <br><textarea class="oval hidden" th:id="|expResultch*{id}|" placeholder="Ожидаемый результат" name="expResult" ></textarea>
+            <br><textarea class="oval hidden" th:id="|conditionch*{id}|" placeholder="Условие" name="condition"></textarea>
             <span th:id="|ch*{id}|">
             </span>
         </form>

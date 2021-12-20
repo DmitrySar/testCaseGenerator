@@ -16,6 +16,7 @@ public class TestCase {
     private int id;
     private String name;
     private String expResult;
+    private String condition;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Step> stepList = new ArrayList<>();
 
