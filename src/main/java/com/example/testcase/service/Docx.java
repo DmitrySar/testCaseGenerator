@@ -14,12 +14,12 @@ import java.util.stream.Stream;
 
 @Service
 public class Docx {
-    public byte[] fromString(String text) {
+    public byte[] fromString(String[] text) {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             XWPFDocument document = new XWPFDocument();
-            XWPFParagraph paragraph = document.createParagraph();
-            XWPFRun run = paragraph.createRun();
-            run.setText(text);
+            for (String s: text) {
+                document.createParagraph().createRun().setText(s);
+            }
             document.write(out);
             return IOUtils.toByteArray(new ByteArrayInputStream(out.toByteArray()));
         } catch (IOException e) {

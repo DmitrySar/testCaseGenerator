@@ -42,9 +42,14 @@ function fillTestComplete(res) {
         inner += "<p><b> Ожидаемый результат:</b><br>" + testCaseBackEnd.expResult +"</p>";
     }
 
-    testComplect.innerHTML = testComplect.innerHTML = "<fieldset><legend>Тест-комплект</legend>" +
-        inner + "</fieldset>";
-}
+    testComplect.innerHTML = `<fieldset><legend>Тест-комплект</legend>  
+        ${inner} 
+        <form action="/word" method="post">
+        <textarea class="hidden" name="text" >${inner}</textarea>
+        <input class="oval" type="submit" value="create docx">
+        </form>
+        </fieldset>`;
+ }
 
 function setColor(btnId) {
     btn = document.getElementById(btnId);
