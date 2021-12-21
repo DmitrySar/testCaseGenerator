@@ -42,7 +42,7 @@ function fillTestComplete(res) {
         inner += "<p><b> Ожидаемый результат:</b><br>" + testCaseBackEnd.expResult +"</p>";
     }
 
-    testComplect.innerHTML = `<fieldset><legend>Тест-комплект</legend>  
+    testComplect.innerHTML = `<fieldset class="oval"><legend>Тест-комплект</legend>  
         ${inner} 
         <form action="/word" method="post">
         <textarea class="hidden" name="text" >${inner}</textarea>
