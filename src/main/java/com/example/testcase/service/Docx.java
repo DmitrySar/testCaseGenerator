@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @Service
 public class Docx {
-    public byte[] fromString(String text) {
+    public byte[] fromString(String text, int fontSize) {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             XWPFDocument document = new XWPFDocument();
             for (String s: text.split("</p>")) {
@@ -22,6 +22,7 @@ public class Docx {
                     if (isBold) b = b.substring(3);
                     XWPFRun run = document.createParagraph().createRun();
                     run.setBold(isBold);
+                    run.setFontSize(fontSize);
                     run.setText(b);
                 }
             }

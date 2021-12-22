@@ -15,7 +15,7 @@ public class DocController {
 
     @RequestMapping(value = "/word", method = RequestMethod.POST,
             produces="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-    public @ResponseBody byte[] convertToDoc(@RequestParam String text) {
-        return docx.fromString(text);
+    public @ResponseBody byte[] convertToDoc(@RequestParam String text, @RequestParam int fontSize) {
+        return docx.fromString(text, fontSize);
     }
 }

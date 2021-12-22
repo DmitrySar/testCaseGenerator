@@ -51,6 +51,7 @@ function fillTestComplete(res) {
         ${inner} 
         <form action="/word" method="post">
         <textarea class="hidden" name="text" >${inner}</textarea>
+        <input type="hidden" name="fontSize" value="14">
         <input class="oval" type="submit" value="create docx">
         </form>
         </fieldset>`;
