@@ -5,6 +5,7 @@ import com.example.testcase.domain.Step;
 import com.example.testcase.domain.TestCase;
 import com.example.testcase.repository.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +33,12 @@ public class MainController {
     }
 
     @GetMapping("/testcase")
-    public String addTestCase(@RequestParam int chapterId,
-                              @RequestParam String caseName,
-                              @RequestParam String expResult,
-                              @RequestParam String condition,
-                              @RequestParam String[] stepNames) {
+    public String addTestCase(@RequestParam(defaultValue = "0") int chapterId,
+                              @RequestParam(defaultValue = "") String caseName,
+                              @RequestParam(defaultValue = "") String expResult,
+                              @RequestParam(defaultValue = "") String condition,
+                              @RequestParam(defaultValue = "") String[] stepNames) {
+        if (caseName.equals("")) return "redirect:/";
         TestCase testCase = new TestCase();
         testCase.setName(caseName);
         testCase.setExpResult(expResult);
