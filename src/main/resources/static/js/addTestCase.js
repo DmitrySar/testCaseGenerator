@@ -40,6 +40,11 @@ function fillTestComplete(res) {
             inner += "<p>" + (parseInt(i)+1) + ". " + step.name + "</p>";
         }
         inner += "<p><b> Ожидаемый результат:</b><br>" + testCaseBackEnd.expResult +"</p>";
+        inner += "<p><b>Фактический результат:</b></p>" +
+            "<p>___________________________(вводит сам пользователь)</p>" +
+            "<p><b>Комментарий:</b></p>" +
+            "<p>____________________________________________________</p>" +
+            "<p><br></p>";
     }
 
     testComplect.innerHTML = `<fieldset class="oval"><legend>Тест-комплект</legend>  

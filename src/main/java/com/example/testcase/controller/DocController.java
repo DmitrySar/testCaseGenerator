@@ -1,12 +1,12 @@
 package com.example.testcase.controller;
 
-import com.example.testcase.domain.TestCase;
 import com.example.testcase.service.Docx;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.HtmlUtils;
 
-import javax.swing.text.html.HTMLDocument;
-import java.util.List;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 
 @RestController
 public class DocController {
@@ -21,7 +21,6 @@ public class DocController {
     @RequestMapping(value = "/word", method = RequestMethod.POST,
             produces="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     public @ResponseBody byte[] convertToDoc(@RequestParam String text) {
-        text = text.replaceAll("<.>", "");
-        return docx.fromString(text.split("<.{2}>"));
+        return docx.fromString(text);
     }
 }
