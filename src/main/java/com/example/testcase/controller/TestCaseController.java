@@ -34,8 +34,8 @@ public class TestCaseController {
         return testCaseList.stream()
                 .filter(t -> testCases.stream()
                         .anyMatch(tc -> tc.getTestCaseId() == t.getId()))
+                .distinct()
                 .collect(Collectors.toList());
-
     }
 
 }
