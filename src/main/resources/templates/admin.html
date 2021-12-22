@@ -2,21 +2,23 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Admin</title>
 </head>
 <body>
 <header>
     <nav>
-        <a href="/">Главная</a>
+        <a class="oval" href="/">Главная</a>
     </nav>
 </header>
 <div th:each="ch: ${chapters}">
     <fieldset>
         <legend>
-            <a th:text="|${ch.name}(Удалить раздел)|" th:href="@{/admin/delChapter(id=${ch.id})}"></a>
+            <a class="oval" th:text="|${ch.name}(Удалить раздел)|" th:href="@{/admin/delChapter(id=${ch.id})}"></a>
         </legend>
         <span th:each="test: ${ch.testCaseList}">
-            <br><a th:text="|${test.name}(Удалить тест-кейс)|" th:href="@{/admin/delTest(chapterId=${ch.id}, testId=${test.id})}"></a>
+            <br><a class="oval" th:text="|${test.name}(Удалить тест-кейс)|" th:href="@{/admin/delTest(chapterId=${ch.id}, testId=${test.id})}"></a>
         </span>
     </fieldset>
 </div>
