@@ -1,14 +1,8 @@
 package com.example.testcase.controller;
 
-import com.example.testcase.domain.Chapter;
-import com.example.testcase.domain.Step;
-import com.example.testcase.domain.TestCase;
-import com.example.testcase.domain.TestCaseFromChapter;
+import com.example.testcase.domain.*;
 import com.example.testcase.repository.ChapterRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +13,11 @@ import java.util.stream.Collectors;
 public class TestCaseController {
 
     private final ChapterRepository repository;
+    private TestCases testCases;
 
-    public TestCaseController(ChapterRepository repository) {
+    public TestCaseController(ChapterRepository repository, TestCases testCases) {
         this.repository = repository;
+        this.testCases = testCases;
     }
 
     @PostMapping
